@@ -1,60 +1,29 @@
-// This file is part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
-// File name: projects/03/a/Register.hdl
-
-/**
- * Author:	Christopher O'Toole
- * Date:	2018/11/08
- * 16-bit register:
- * If load[t] == 1 then out[t+1] = in[t]
- * else out does not change
- */
-
-//   Let $b_i$ for $i \in [0, 15]$ represent each bit stored by this register.
-// Two distinct cases describe the functionality of this chip.
-//   - Case 1 (load = 0): $b_i=in[i]$
-//   - Case 2 (load = 1): $b_i$ holds its current value.
-//   These cases follow from the documentation for the operation of the Bit chip.
-//   The fact that this holds for each individual bit implies that the overall operation is to set
-// the register value to the input when load=1, and keep the current register value if load=0.
+//Sung Ki Ling
+//16 bit register
 
 CHIP Register {
     IN in[16], load;
     OUT out[16];
 
     PARTS:
-    // Put your code here:
-	// Set $b_0$ if load=1, keep its value otherwise
 	Bit(in=in[0],load=load,out=out[0]);
-	// Set $b_1$ if load=1, keep its value otherwise
     Bit(in=in[1],load=load,out=out[1]);
-	// Set $b_2$ if load=1, keep its value otherwise
     Bit(in=in[2],load=load,out=out[2]);
-	// Set $b_3$ if load=1, keep its value otherwise
     Bit(in=in[3],load=load,out=out[3]);
-	// Set $b_4$ if load=1, keep its value otherwise
     Bit(in=in[4],load=load,out=out[4]);
-	// Set $b_5$ if load=1, keep its value otherwise
     Bit(in=in[5],load=load,out=out[5]);
-	// Set $b_6$ if load=1, keep its value otherwise
     Bit(in=in[6],load=load,out=out[6]);
-	// Set $b_7$ if load=1, keep its value otherwise
     Bit(in=in[7],load=load,out=out[7]);
-	// Set $b_8$ if load=1, keep its value otherwise
     Bit(in=in[8],load=load,out=out[8]);
-	// Set $b_9$ if load=1, keep its value otherwise
     Bit(in=in[9],load=load,out=out[9]);
-	// Set $b_10$ if load=1, keep its value otherwise
     Bit(in=in[10],load=load,out=out[10]);
-	// Set $b_11$ if load=1, keep its value otherwise
     Bit(in=in[11],load=load,out=out[11]);
-	// Set $b_12$ if load=1, keep its value otherwise
     Bit(in=in[12],load=load,out=out[12]);
-	// Set $b_13$ if load=1, keep its value otherwise
     Bit(in=in[13],load=load,out=out[13]);
-	// Set $b_14$ if load=1, keep its value otherwise
     Bit(in=in[14],load=load,out=out[14]);
-	// Set $b_15$ if load=1, keep its value otherwise
     Bit(in=in[15],load=load,out=out[15]);
 }
+
+//there are 16 bits in the 16 bit register, it checks each of them and see if the load value is 1
+//if load==1, it will return the input, if it is 0, it will return the value
+// if load(t-1) == 1 then out(t) = in(t - 1) else out(t) = out(t - 1)
