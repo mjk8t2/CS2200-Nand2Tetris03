@@ -15,5 +15,24 @@ CHIP RAM64 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    // by stacking 8 RAM8 components together, we have 64 registers (8*8=64)
+    // we don't use all the bits of the address in each of these RAM units
+    // because 2^6 = 64 which is too big
+    // instead, we can limit it to leftmost 3 of the bits, bits 3, 4, 5
+    // which allows us to specify each address for RAM8 since 2^3 = 8
+    RAM8(in=in,load=l1,address=address[3..5],out=out1);
+    RAM8(in=in,load=l2,address=address[3..5],out=out2);
+    RAM8(in=in,load=l3,address=address[3..5],out=out3);
+    RAM8(in=in,load=l4,address=address[3..5],out=out4);
+    RAM8(in=in,load=l5,address=address[3..5],out=out5);
+    RAM8(in=in,load=l6,address=address[3..5],out=out6);
+    RAM8(in=in,load=l7,address=address[3..5],out=out7);
+    RAM8(in=in,load=l8,address=address[3..5],out=out8);
+
+    // so now we have accessed eight different addresses, but we need to select
+    // the correct one to write/read to/from (we only want one register)
+    // to do this, we have to look at the remaining bits of the original address
+    // that we skipped earlier (bits 0, 1, and 2)
+    DMux8Way(in=load,sel=address[0..2],a=l1,b=l2,c=l3,d=l4,e=l5,f=l6,g=l7,h=l8);
+    Mux8Way16(a=out1,b=out2,c=out3,d=out4,e=out5,f=out6,g=out7,h=out8,sel=address[0..2],out=out);
 }

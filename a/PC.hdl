@@ -16,5 +16,17 @@ CHIP PC {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+	// increment the current 16-bit state
+    Inc16(in=cur, out=incCur);
+	
+	// check if needs reset, if 1 set all 0, else check load 
+	Mux16(a=val2,b=false,sel=reset,out=val3);
+	// check if needs load, if 1 store in, else check inc
+	Mux16(a=val1,b=in,sel=load,out=val2);
+	// check if needs inc, if 1 store incremented state, else keep old state
+	Mux16(a=cur,b=incCur,sel=inc,out=val1);
+		
+	// update the state according to results from checking all control bits
+	Register(in=val3,load=true,out=cur,out=out);
+	
 }
