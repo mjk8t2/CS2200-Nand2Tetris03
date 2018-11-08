@@ -5,6 +5,9 @@ B = Sung Ki Ling,
 C = Christopher O'Toole,
 D = Yunchao Zhang
 
+## PDF file
+https://docs.google.com/document/d/1l3EUQvs-KCTxjkiEYJgeFUWRzT8L4G-X-TGuYRJOPwc/edit?usp=sharing
+
 ## Who does what
 Following the A,B,C,D pattern from last time, the chip implementation will be the following:
 
