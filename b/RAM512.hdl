@@ -1,32 +1,20 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/03/b/RAM512.hdl
+
 /**
- * Author:	Matthew Kovar
- * Date:	2018/11/07
- *
  * Memory of 512 registers, each 16 bit-wide. Out holds the value
- * stored at the memory location specified by address. If load == 1, then 
- * the 'in' value is loaded into the memory location specified by address 
- * (the loaded value will be given to out after the next time step.)
+ * stored at the memory location specified by address. If load=1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out after the next time step.)
  */
-
-// Documentation is included as comments preceded by the // characters
-// The RAM512 chip is just 512 16-bit registers stacked together.
-// We load in the same way as with the Bit chip, except now we're
-// loading 16-bit words instead of 1-bit words, and we also need
-// an address that tells which of the 512 registers to access
-
-// Hence, with an address, an input word, and a load, we can read/write/store
-// 512 distinct 16-bit words
 
 CHIP RAM512 {
     IN in[16], load, address[9];
-    OUT out[16]; // a 16-bit word
+    OUT out[16];
 
     PARTS:
-    // by stacking 8 RAM64 components together, we have 512 registers (8*64=512)
-    // we don't use all the bits of the address in each of these RAM units
-    // because 2^9 = 512 which is too big
-    // instead, we can limit it to just 6 of the bits, bits 3, 4, 5, 6, 7, 8
-    // which allows us to specify each address for RAM64 since 2^6 = 64
     RAM64(in=in,load=l1,address=address[3..8],out=o1);
     RAM64(in=in,load=l2,address=address[3..8],out=o2);
     RAM64(in=in,load=l3,address=address[3..8],out=o3);
@@ -36,19 +24,6 @@ CHIP RAM512 {
     RAM64(in=in,load=l7,address=address[3..8],out=o7);
     RAM64(in=in,load=l8,address=address[3..8],out=o8);
 
-    // so now we have accessed eight different addresses, but we need to select
-    // the correct one to write/read to/from (we only want one register)
-    // to do this, we have to look at the remaining bits of the original address
-    // that we skipped earlier (bits 0, 1, and 2)
-
-    // the demux lets us choose which of the eight outputs we want to send the load to,
-    // using the remaining three bits of the original address to choose
-
-    // if load == 1, then we choose which of 8 RAM64 units the load should go to
-    // if load == 0, then it doesn't matter since we're not writing to any register
     DMux8Way(in=load,sel=address[0..2],a=l1,b=l2,c=l3,d=l4,e=l5,f=l6,g=l7,h=l8);
-
-    // finally, we have to use the remaining 3 bits of the address to choose
-    // which of the 8 outputs we had earlier to return as the 16-bit word output
     Mux8Way16(a=o1,b=o2,c=o3,d=o4,e=o5,f=o6,g=o7,h=o8,sel=address[0..2],out=out);
 }
