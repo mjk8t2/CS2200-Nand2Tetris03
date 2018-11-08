@@ -1,0 +1,34 @@
+/**
+ * Author:	Matthew Kovar
+ * Date:	2018/11/07
+ *
+ * 1-bit register.
+ * If load[t]=1 then out[t+1] = in[t]
+ *              else out does not change (out[t+1]=out[t])
+ */
+
+// Documentation is included as comments preceded by the // characters
+// The Bit chip returns the input when load is 1,
+// otherwise if load is 0, it returns the value
+// it held previously
+
+// The select bit of the multiplexor can become the load bit of the bit chip.
+// If we want the 1-bit register to start storing a new value, we put this value in the
+// input and set the load bit to 1; if we want the 1-bit register to keep storing its internal
+// value, we can set the load bit to 0, and then the input is ignored.
+
+// if load(t-1) == 1 then out(t) = in(t - 1) else out(t) = out(t - 1)
+
+CHIP Bit {
+    IN in, load;
+    OUT out;
+
+    PARTS:
+    // If load == 1, then dffin = in
+    // If load == 0, then dffin = feedback
+    Mux(a=feedback, b=in, sel=load, out=dffin);
+    // use the D flip flop to make the selection time-dependent
+    // In other words, if load == 1, then return the input
+    // In other words, if load == 0, then return the value held previously
+    DFF(in=dffin, out=feedback, out=out);
+}
