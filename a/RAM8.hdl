@@ -20,9 +20,6 @@ CHIP RAM8 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
-	//
-
 	// Generate flags which select the register indicated by the address.
 	DMux8Way(in=load,sel=address,a=l1,b=l2,c=l3,d=l4,e=l5,f=l6,g=l7,h=l8);
 	
