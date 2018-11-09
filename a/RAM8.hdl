@@ -1,8 +1,3 @@
-// This file is part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
-// File name: projects/03/a/RAM8.hdl
-
 /**
  * Author:	Christopher O'Toole
  * Date:	2018/11/08
@@ -12,12 +7,12 @@
  * (the loaded value will be emitted to out from the next time step onward).
  */
 
-//   The RAM8 chip is composed of 8 16-bit registers. If load=1, the RAM8 chip will set 
+// The RAM8 chip is composed of 8 16-bit registers. If load=1, the RAM8 chip will set 
 // the specified 16-bit value in in[16] to the address specified, otherwise the register at
 // that address will keep its current value.
-//   For example, if address==000 and load = 1, then the prescribed operation is to set the first
+// For example, if address==000 and load = 1, then the prescribed operation is to set the first
 // register to the value held in in[16].
-//   The return value of this chip will either be the value that was just set if load=1 or the value that was
+// The return value of this chip will either be the value that was just set if load=1 or the value that was
 // held previously by the register at the specified address if load=0.
 
 CHIP RAM8 {

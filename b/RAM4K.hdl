@@ -1,7 +1,19 @@
-/*
-Sung Ki Ling
-RAM4K
-*/
+/**
+ * Author:	Sung Ki Ling
+ * Date:	2018/11/08
+ * Memory of 4K registers, each 16 bit-wide. Out hold the value
+ * stored at the memory location specified by address. If load=1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out after the next time step.)
+ */
+
+// The RAM4K chip is just 4K 16-bit registers stacked together.
+// We load in the same way as with the Bit chip, except now we're
+// loading 16-bit words instead of 1-bit words, and we also need
+// an address that tells which of the 4096 registers to access
+
+// Hence, with an address, an input word, and a load, we can read/write/store
+// about four thousand (4096) distinct 16-bit words
 
 CHIP RAM4K {
     IN in[16], load, address[12];
