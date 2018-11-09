@@ -16,31 +16,23 @@
 // about four thousand (4096) distinct 16-bit words
 
 CHIP RAM4K {
+    
     IN in[16], load, address[12];
     OUT out[16];
 
     PARTS:
-    
-    //selecting the ram512 based on the address
-    DMux8Way(in=load,sel=address[9..11],a=1,b=2,c=3,d=4,e=5,f=6,g=7,h=8);
-    
     //if load==1, set the 16-bit value at address specified in the ram512 module
-    RAM512(in=in,load=load1,address=address[0..8],out=out1);
-    //if load==1, set the 16-bit value at address specified in the ram512 module
-    RAM512(in=in,load=load2,address=address[0..8],out=out2);
-    //if load==1, set the 16-bit value at address specified in the ram512 module
-    RAM512(in=in,load=load3,address=address[0..8],out=out3);
-    //if load==1, set the 16-bit value at address specified in the ram512 module
-    RAM512(in=in,load=load4,address=address[0..8],out=out4);
-    //if load==1, set the 16-bit value at address specified in the ram512 module
-    RAM512(in=in,load=load5,address=address[0..8],out=out5);
-    //if load==1, set the 16-bit value at address specified in the ram512 module
-    RAM512(in=in,load=load6,address=address[0..8],out=out6);
-    //if load==1, set the 16-bit value at address specified in the ram512 module
-    RAM512(in=in,load=load7,address=address[0..8],out=out7);
-    //if load==1, set the 16-bit value at address specified in the ram512 module
-    RAM512(in=in,load=load8,address=address[0..8],out=out8);
+    RAM512(in=in,load=l1,address=address[3..11],out=o1);
+    RAM512(in=in,load=l2,address=address[3..11],out=o2);
+    RAM512(in=in,load=l3,address=address[3..11],out=o3);
+    RAM512(in=in,load=l4,address=address[3..11],out=o4);
+    RAM512(in=in,load=l5,address=address[3..11],out=o5);
+    RAM512(in=in,load=l6,address=address[3..11],out=o6);
+    RAM512(in=in,load=l7,address=address[3..11],out=o7);
+    RAM512(in=in,load=l8,address=address[3..11],out=o8);
 
+    // selecting the ram512 based on the address
+    DMux8Way(in=load,sel=address[0..2],a=l1,b=l2,c=l3,d=l4,e=l5,f=l6,g=l7,h=l8);
     //based on the address, select the ram512 module output that was obtained from above
-    Mux8Way16(a=out1,b=out2,c=out3,d=out4,e=out5,f=out6,g=out7,h=out8,sel=address[9..11],out=out);
+    Mux8Way16(a=o1,b=o2,c=o3,d=o4,e=o5,f=o6,g=o7,h=o8,sel=address[0..2],out=out);
 }
