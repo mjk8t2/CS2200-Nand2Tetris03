@@ -1,16 +1,12 @@
+// Author: Yunchao Zhang
+// File name: projects/03/a/RAM64.hdl
+// Description: 
 /**
- * Author:  Yunchao Zhang
- * Date:    2018-11-09
  * Memory of 64 registers, each 16 bit-wide. Out holds the value
  * stored at the memory location specified by address. If load==1, then 
  * the in value is loaded into the memory location specified by address 
  * (the loaded value will be emitted to out from the next time step onward).
  */
-
-// The RAM64 chip is just 64 16-bit registers stacked together.
-// We load in the same way as with the Bit chip, except now we're
-// loading 16-bit words instead of 1-bit words, and we also need
-// an address that tells which of the 64 registers to access
 
 CHIP RAM64 {
     IN in[16], load, address[6];

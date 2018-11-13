@@ -1,16 +1,13 @@
+// Author: Yunchao Zhang
+// File name: projects/03/a/PC.hdl
+// Description: 
 /**
- * Author:	Yunchao Zhang
- * Date:	2018-11-09
  * A 16-bit counter with load and reset control bits.
  * if      (reset[t] == 1) out[t+1] = 0
  * else if (load[t] == 1)  out[t+1] = in[t]
  * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
  * else                    out[t+1] = out[t]
  */
-
-// The program counter is a register that contains the address (location) of the instruction being 
-// executed at the current time. As each instruction, the program counter increases its stored value by 1. 
-// After each instruction is fetched, the program counter points to the next instruction in the sequence.
 
 CHIP PC {
     IN in[16],load,inc,reset;
@@ -28,8 +25,6 @@ CHIP PC {
 	Mux16(a=cur,b=incCur,sel=inc,out=val1);
 		
 	// update the state according to results from checking all control bits
-	// the output from the register also needs to get fed back through 
-	// to get processed for the next clock cycle.
 	Register(in=val3,load=true,out=cur,out=out);
 	
 }
