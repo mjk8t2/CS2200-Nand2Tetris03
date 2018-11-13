@@ -1,6 +1,13 @@
-// This file is part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
+//Author: Yunchao Zhang
+// The testing documentation follows:
+// This test script for RAM64 is adequate. It has 
+// tests for all 8 RAM8 unit as all 8 addresses are 
+// tested. Also, it runs load with 1 and load with 0
+// on multiple different inputs, both positive and negative.
+// So it has enough tests to test all functionality of this 
+// chip.
+
+
 // File name: projects/03/a/RAM64.tst
 
 load RAM64.hdl,
