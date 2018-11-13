@@ -3,6 +3,11 @@
 // by Nisan and Schocken, MIT Press.
 // File name: projects/03/a/PC.tst
 
+// This test script is adequate as it has tested all essential 
+// functionality and cases. PC chip has three main functions: 
+// load, reset, and inc. This test script tests all of them with
+// given all unique initial states 
+
 load PC.hdl,
 output-file PC.out,
 compare-to PC.cmp,
