@@ -3,6 +3,8 @@
 // by Nisan and Schocken, MIT Press.
 // File name: projects/03/a/Bit.tst
 
+//The test is adequate.  It goes over all the possible combinations of inputs in and load.
+
 load Bit.hdl,
 output-file Bit.out,
 compare-to Bit.cmp,
