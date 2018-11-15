@@ -3,6 +3,9 @@
 // by Nisan and Schocken, MIT Press.
 // File name: projects/03/b/RAM512.tst
 
+
+//This is an adequate test.  It utilizes different inputs as well as different addresses to make sure that the 16 bit word can be stored in different addresses
+
 load RAM512.hdl,
 output-file RAM512.out,
 compare-to RAM512.cmp,
